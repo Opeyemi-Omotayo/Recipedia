@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Axios from "axios";
+import RecipeCard from "../card/RecipeCard";
 
 const Recipe = () => {
   const [inputValue, setInputValue] = useState("");
@@ -24,8 +25,8 @@ const Recipe = () => {
 
   return (
     <div className="flex items-center flex-col justify-center">
-      <h1 className="text-3xl lg:text-4xl font-bold underline mt-[4rem]">Food Recipe Hub</h1>
-      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12" onSubmit={onSubmit}>
+      <h1 className="text-3xl lg:text-4xl font-bold underline mt-[5rem]">Recipedia</h1>
+      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12 mb-[4.5rem]" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Type the Ingredient"
@@ -76,6 +77,9 @@ const Recipe = () => {
         </select>
         <button className="p-4 w-[70%] lg:w-[20%] animate-bounce bg-yellow-500 text-white rounded-lg shadow-md">Get Recipe</button>
       </form>
+      {recipes.map((recipe) => (
+        <RecipeCard recipe={recipe}/>
+      )) }
     </div>
   );
 };
