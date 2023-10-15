@@ -1,13 +1,31 @@
 import { useState } from "react";
+import Axios from "axios";
 
 const Recipe = () => {
   const [inputValue, setInputValue] = useState("");
   const [selectValue, setSelectValue] = useState("vegetarian");
+  const [recipes, setRecipes] = useState([]);
+
+  const APP_ID = process.env.REACT_APP_EDAMAM_ID;
+  const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
+
+  const url = `https://api.edamam.com/search?q=${inputValue}&app_id=${APP_ID}&app_key=${APP_KEY}&health=${selectValue}`;
+
+  const getRecipeInfo = async () => {
+    var result = await Axios.get(url);
+    setRecipes(result.data.hits);
+    console.log(result.data.hits);
+  };
+
+  const onSubmit = (e:any) => {
+    e.preventDefault(); 
+    getRecipeInfo();
+  };
 
   return (
     <div className="flex items-center flex-col justify-center">
       <h1 className="text-3xl lg:text-4xl font-bold underline mt-[4rem]">Food Recipe Hub</h1>
-      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12">
+      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Type the Ingredient"
@@ -23,37 +41,37 @@ const Recipe = () => {
             value={selectValue}
             onClick={() => {setSelectValue("vegan");}}
           >
-            vegan
+            Vegan
           </option>
           <option
             value={selectValue}
             onClick={() => {setSelectValue("vegetarian");}}
           >
-            vegetarian
+            Vegetarian
           </option>
           <option
             value={selectValue}
             onClick={() => {setSelectValue("low-sugar");}}
           >
-            low-sugar
+            Low-sugar
           </option>
           <option
             value={selectValue}
             onClick={() => {setSelectValue("dairy-free");}}
           >
-            dairy-free
+            Dairy-free
           </option>
           <option
             value={selectValue}
             onClick={() => {setSelectValue("immuno-supportive");}}
           >
-            immuno-supportive
+            Immuno-supportive
           </option>
           <option
             value={selectValue}
             onClick={() => {setSelectValue("wheat-free");}}
           >
-            wheat-free
+            Wheat-free
           </option>
         </select>
         <button className="p-4 w-[70%] lg:w-[20%] animate-bounce bg-yellow-500 text-white rounded-lg shadow-md">Get Recipe</button>
