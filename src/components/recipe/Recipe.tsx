@@ -25,7 +25,7 @@ const Recipe = () => {
 
   return (
     <div className="flex items-center flex-col justify-center">
-      <h1 className="text-3xl lg:text-4xl font-bold underline mt-[5rem]">Recipedia</h1>
+      <h1 className="text-3xl lg:text-4xl font-bold underline mt-[5rem]">Reci<span className="text-yellow-500">p</span>edia</h1>
       <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12 mb-[4.5rem]" onSubmit={onSubmit}>
         <input
           type="text"
