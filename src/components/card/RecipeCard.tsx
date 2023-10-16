@@ -1,27 +1,33 @@
-const RecipeCard = ({ recipe }: any) => {
+const RecipeCard = ({ recipe, index }: any) => {
+
   return (
-    <div
-      className="flex bg-gray-50 hover:bg-white border overflow-hidden border-yellow-500 shadow-lg rounded-lg h-[250px] w-[80%] mb-8"
-      key={Math.random()}
+    <a
+      href={recipe["recipe"]["url"]}
+      className="flex bg-gray-50 hover:bg-white border overflow-hidden border-yellow-500 shadow-lg rounded-lg w-[95%] lg:w-[80%] mb-8"
+      key={index}
+      target="_blank"
+      rel="noreferrer"
     >
       <img
         src={recipe["recipe"]["image"]}
         alt={recipe["recipe"]["label"]}
-        className="w-[250px] "
+        className="w-[100px] lg:w-[250px] "
       />
       <div className="w-full p-4">
         <div className="flex items-center justify-between">
-          <p className="text-xl font-bold">{recipe["recipe"]["label"]}</p>
-          <p className="bg-gray-100 rounded-xl text-gray-600 px-4 py-2">
+          <p className="text-base lg:text-xl font-bold">
+            {recipe["recipe"]["label"]}
+          </p>
+          <p className="bg-gray-100 text-xs lg:text-sm rounded-xl text-gray-600 px-3 py-2">
             {recipe["recipe"]["dietLabels"][0]}
           </p>
         </div>
 
         <div>
-          <p className="text-base font-semibold pb-2">Ingredients</p>
+          <p className="text-sm lg:text-base font-semibold pb-2">Ingredients</p>
           {recipe["recipe"]["ingredientLines"].map(
             (ingredient: string, index: number) => (
-              <p key={index} className="text-sm">
+              <p key={index} className="text-xs lg:text-sm">
                 {" "}
                 *{ingredient}
               </p>
@@ -29,7 +35,7 @@ const RecipeCard = ({ recipe }: any) => {
           )}
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

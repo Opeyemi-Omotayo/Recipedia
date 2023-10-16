@@ -13,9 +13,8 @@ const Recipe = () => {
   const url = `https://api.edamam.com/search?q=${inputValue}&app_id=${APP_ID}&app_key=${APP_KEY}&health=${selectValue}`;
 
   const getRecipeInfo = async () => {
-    var result = await Axios.get(url);
+    let result = await Axios.get(url);
     setRecipes(result.data.hits);
-    console.log(result.data.hits);
   };
 
   const onSubmit = (e:any) => {
@@ -26,7 +25,7 @@ const Recipe = () => {
   return (
     <div className="flex items-center flex-col justify-center">
       <h1 className="text-3xl lg:text-4xl font-bold underline mt-[5rem]">Reci<span className="text-yellow-500">p</span>edia</h1>
-      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12 mb-[4.5rem]" onSubmit={onSubmit}>
+      <form className="flex flex-col lg:flex-row items-center justify-between w-[90%] lg:w-[70%] mt-12 mb-[3rem] lg:mb-[4.5rem]" onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Type the Ingredient"
@@ -77,9 +76,15 @@ const Recipe = () => {
         </select>
         <button className="p-4 w-[70%] lg:w-[20%] animate-bounce bg-yellow-500 text-white rounded-lg shadow-md">Get Recipe</button>
       </form>
-      {recipes.map((recipe) => (
-        <RecipeCard recipe={recipe}/>
-      )) }
+      {recipes.length === 0 ? (
+        <div className="text-center mt-4">
+          <p className="text-red-500 text-lg font-bold h-[70vh]">No recipe available!, Please search again</p>
+        </div>
+      ) : (
+        recipes.map((recipe, index) => (
+            <RecipeCard recipe={recipe} key={index} />
+          ))
+      )}
     </div>
   );
 };
