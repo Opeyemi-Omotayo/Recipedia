@@ -1,9 +1,9 @@
-import Recipe from "./components/recipe/Recipe";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="bg-gray-100">
-     <Recipe />
+      <Home />
     </div>
   );
 }
